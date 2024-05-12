@@ -1,0 +1,47 @@
+{% extends 'library/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        background: url('{% static "library/images/login.jpg" %}') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+
+<div class="container" id="logcon">
+</br></br></br>
+    <div class="row">
+        <div class="col-sm-9 col-md-5 col-lg-4 mx-auto">
+            <div class="card border-0 shadow rounded-3 my-5">
+                <div class="card-body p-4 p-sm-4">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5"><span style="font-size: 125%;">Welcome ba<span class="text-danger">ck</span></span>
+                    </h5>
+                    <form action="{% url 'login' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            <input type="text" name="username" class="form-control" id="floatingInputUsername" placeholder="myusername">
+                            <label for="floatingInputUsername">Username</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password1" class="form-control" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
+                            <label class="form-check-label" for="rememberPasswordCheck">Remember password</label>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Sign in</button>
+                        </div></br>
+                        <div>
+                            <p>Don't have an account? <a href="{% url "register" %}" class="fw-bold">Register here</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br><br>
+
+{% endblock content %}

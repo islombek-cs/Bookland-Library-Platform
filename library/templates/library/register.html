@@ -1,0 +1,58 @@
+{% extends 'library/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    body {
+        background: url('{% static "library/images/register.jpg" %}') no-repeat center center fixed;
+        background-size: cover;
+    }
+</style>
+
+</br></br>
+<div class="container-fluid" id="contain">
+    <div class="row">
+        <div class="col-lg-10 col-xl-5 mx-auto">
+            <div class="card flex-row my-4 border-0 shadow rounded-3 overflow-hidden">
+                <div class="card-body p-4 p-sm-4">
+                    <h5 class="card-title text-center mb-4 fw-light fs-5 text-dark" id="registerr">
+                        <span style="font-size: 175%;"> Welcome to Regis<span class="text-danger">ter</span></span>
+                    </h5>
+
+                    <form action="{% url 'register' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-floating mb-3">
+                            <input type="text" name="uname" class="form-control" id="floatingInputUsername" placeholder="myusername" required autofocus>
+                            <label for="floatingInputUsername">Username</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com">
+                            <label for="floatingInputEmail">Email address</label>
+                        </div><hr>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                            <label for="floatingPassword">Password</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input type="password" name="confirm" class="form-control" id="floatingPasswordConfirm" placeholder="Confirm Password">
+                            <label for="floatingPasswordConfirm">Confirm Password</label>
+                        </div>
+
+                        <div class="d-grid mb-3">
+                            <button class="btn btn-lg btn-primary btn-login fw-bold text-uppercase" type="submit">Register Now</button>
+                        </div>
+                        <p class="d-block text-center mt-2 small">Already have an account? <a href="{% url 'login' %}" class="fw-bold">Sign In</a> </p>
+                        <div class="d-grid mb-2">
+                            <button class="btn btn-lg btn-outline-danger btn-login fw-bold text-uppercase" type="submit" id="google"><i class="fab fa-google me-2"></i> Sign up with Google</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><br><br>
+
+{% endblock content %}
