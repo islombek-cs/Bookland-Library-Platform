@@ -12,7 +12,7 @@ urlpatterns = [
     path('blog_detail/', views.blog_detail, name='blog_detail'),
     
     path('purchase_book/', views.purchase_book, name='purchase_book'),
-    path('recent_book/', views.recent_book, name='recent_book'),
+    path('free_books/', views.free_books, name='free_books'),
     path('find_readers/', views.find_readers, name='find_readers'),
     
 ]

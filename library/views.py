@@ -10,7 +10,13 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 # Create your views here.
 def home(request):
-    return render(request, "library/home.html")
+    free_books = Free_Book.objects.all()[:3]
+
+    context = {
+        'free_books': free_books
+    }
+
+    return render(request, "library/home.html", context)
 
 def about(request):
     return render(request, "library/about.html")
@@ -24,8 +30,34 @@ def blog_detail(request):
 def purchase_book(request):
     return render(request, "library/purchase_book.html")
 
-def recent_book(request):
-    return render(request, "library/recent_book.html")
+def free_books(request):
+    if request.method == 'POST':
+        form = Free_Book(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('books_list')
+    else:
+        form = Free_Book()
+
+    free_books = Free_Book.objects.all()
+
+    search_query = request.GET.get('q', '')
+    print("Search Query:", search_query)  # Check what query is being received
+    if search_query:
+        books = Free_Book.objects.filter(book_title__icontains=search_query)
+        print("Filtered Books:", books)  # Check the filtered queryset
+    else:
+        books = Free_Book.objects.all()
+
+    free_books = books  # Simplified to use one variable
+
+    context = {
+        'books': books,
+        'free_books': free_books
+    }
+
+    return render(request, "library/free_books.html", context)
+
 
 def find_readers(request):
     return render(request, "library/find_readers.html") 

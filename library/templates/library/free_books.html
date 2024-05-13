@@ -1,0 +1,71 @@
+{% extends "library/base.html" %}
+{% load static %}
+{% block title %}Free-Books{% endblock %}
+
+{% block content %}
+
+    <style>
+        .header-image {
+            background: url('{% static "library/images/freebks-backimg.png" %}') no-repeat center center;
+            background-size: cover;
+            height: 300px;
+            position: relative;
+        }
+        .search-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50%;
+        }
+        .search-box input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .search-box button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background-color: blue;
+            color: white;
+        }
+    </style>
+
+    <div class="header-image">
+        <div class="search-box">
+            <form method="GET" action="{% url 'free_books' %}">
+                <input type="text" name="q" placeholder="Search free books..." value="{{ request.GET.q }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Book ID</th>
+                    <th>Book Cover</th>
+                    <th>Book Title</th>
+                    <th>Read</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            {% for f_book in free_books %}
+            <tbody>
+                <tr>
+                    <td>{{ f_book.id }}</td>
+                    <td><img src="{{ f_book.book_cover.url }}" alt="PHP cookbook" style="width: 50px;"></td>
+                    <td>{{ f_book.book_title }}</td>
+                    <td><a href="{{ f_book.book_pdf.url }}" target="_blank" class="btn btn-primary">View PDF</a></td>
+                    <td><a href="{{ f_book.book_pdf.url }}" download class="btn btn-success">Download PDF</a></td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+
+{% endblock %}
