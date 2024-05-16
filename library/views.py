@@ -10,7 +10,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 # Create your views here.
 def home(request):
-    free_books = Free_Book.objects.all()[:3]
+    free_books = Free_Book.objects.all()[:]
 
     context = {
         'free_books': free_books
